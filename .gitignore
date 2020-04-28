@@ -1,0 +1,6 @@
+# .NetCore
+[Bb]in/
+[Oo]bj/
+
+# VS
+.VS/

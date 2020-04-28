@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace lojinha.Core.Data.Interfaces
+namespace lojinha.Core.Data
 {
     public class ProductRepo : GenericRepo<Product>
     {

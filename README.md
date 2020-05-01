@@ -13,5 +13,5 @@ Compilando e publicando uma imagem da aplicação ProductCatalog
 ```sh
 docker build -f lojinha.ProductCatalog\Dockerfile -t productcatalog:v1 .
 
-docker run -d -p 63009:80 --link datacontext --name productcatalog productcatalog
+docker run -d -p 63009:80 --link datacontext --name productcatalog productcatalog:v1
 ```

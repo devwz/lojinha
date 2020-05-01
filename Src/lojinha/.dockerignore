@@ -1,0 +1,11 @@
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.vs
+**/bin
+**/Dockerfile*
+**/node_modules
+**/obj
+LICENSE
+README.md

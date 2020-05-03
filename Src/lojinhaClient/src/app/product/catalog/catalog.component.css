@@ -1,0 +1,14 @@
+.jumbotron {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+@media (min-width: 768px) {
+    .jumbotron {
+        padding-top: 6rem;
+        padding-bottom: 7rem;
+    }
+}
+  
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}

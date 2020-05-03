@@ -15,3 +15,11 @@ docker build -f lojinha.ProductCatalog\Dockerfile -t productcatalog:v1 .
 
 docker run -d -p 63009:80 --link datacontext --name productcatalog productcatalog:v1
 ```
+
+Compilando e publicando uma imagem da aplicação lojinhaClient
+
+```sh
+docker build -t lojinhaclient:v1 .
+
+docker run -d -p 4200:80 --name lojinhaclient lojinhaclient:v1
+```

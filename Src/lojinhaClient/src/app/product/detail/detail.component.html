@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container" *ngIf="product">
 
     <div class="row">
         <div class="col">
-            <h1 class="page-header">Title</h1>
+            <h1 class="page-header">{{ product.title }}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item" aria-current="page">Item</li>
+                    <li class="breadcrumb-item" aria-current="page">{{ product.title }}</li>
                 </ol>
             </nav>
         </div>
@@ -15,7 +15,7 @@
     <div class="row">
         
         <div class="col-md-8 mb-3">
-            <img class="img-fluid" src="../../../assets/image_1.jpg">
+            <img class="img-fluid" src="{{ product.imgUrl }}">
         </div>
 
         <div class="col-md-4 mb-3">
@@ -26,10 +26,10 @@
                     <p class="lead">Preço</p>
                 </div>
                 <div class="row">
-                    <h2 class="text-muted">$ 8</h2>
+                    <h2 class="text-muted">$ {{ product.price }}</h2>
                 </div>
                 <div class="row">
-                    <button class="btn btn-success">Comprar</button>
+                    <a [routerLink]="['/checkout/', product.id]" class="btn btn-success">Comprar</a>
                 </div>
             </div>
 
@@ -40,9 +40,13 @@
     <div class="row">
         <div class="col">
             <h4 class="page-header">Bio</h4>
-            <p>Bio bio bio</p>
+            <p>{{ product.bio }}</p>
         </div>
     </div>
+
+</div>
+
+<div class="container">
 
     <div class="row">
 

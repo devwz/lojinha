@@ -5,7 +5,7 @@ import { Product } from './product';
 
 @Injectable()
 export class ProductService {
-    apiUrl = 'http://127.0.0.1:63009/api/product';
+    apiUrl = 'http://localhost:63009/api/product';
 
     constructor(private http: HttpClient) { }
 

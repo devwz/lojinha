@@ -1,11 +1,12 @@
 ﻿using lojinha.Core.Data.Interfaces;
+using lojinha.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace lojinha.Core.Data
 {
-    public abstract class GenericRepo<T> : IGenericRepo<T>
+    public abstract class GenericRepo<T> : IGenericRepo<T> where T : Generic
     {
         protected ApplicationDbContext context;
 

@@ -11,7 +11,8 @@ namespace lojinha.Core.Data
 {
     public class ProductRepo : GenericRepo<Product>
     {
-        public ProductRepo(ApplicationDbContext context) : base(context)
+        public ProductRepo(ApplicationDbContext context)
+            : base(context)
         {
 
         }

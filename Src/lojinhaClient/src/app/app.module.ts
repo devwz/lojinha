@@ -5,23 +5,21 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
 import { ProductComponent } from './product/product.component';
-import { ProductCatalogComponent } from './product/index/index.component';
+import { ProductCatalogComponent } from './product/catalog/catalog.component';
 import { ProductDetailComponent } from './product/detail/detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    NavbarComponent,
+    HeaderComponent,
     ProductComponent,
     ProductCatalogComponent,
     ProductDetailComponent,
-    CheckoutComponent,
-    NotfoundComponent
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

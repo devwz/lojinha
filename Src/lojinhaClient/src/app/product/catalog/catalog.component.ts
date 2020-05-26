@@ -5,9 +5,9 @@ import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-catalog',
-  templateUrl: './index.component.html',
+  templateUrl: './catalog.component.html',
   styleUrls: [
-    './index.component.css'
+    './catalog.component.css'
   ],
   providers: [ ProductService ]
 })

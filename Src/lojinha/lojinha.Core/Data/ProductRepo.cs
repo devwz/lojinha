@@ -28,7 +28,7 @@ namespace lojinha.Core.Data
 
         public override IEnumerable<Product> All()
         {
-            string command = "SELECT * FROM [ProductCatalog.Product]";
+            string command = "SELECT * FROM All_Product";
             return context.SqlConnection.Query<Product>(command);
         }
 
@@ -40,7 +40,7 @@ namespace lojinha.Core.Data
 
         public override Product Find(object id)
         {
-            string command = "SELECT * FROM [ProductCatalog.Product] Where Id = @Id";
+            string command = "SELECT * FROM All_Product WHERE Id = @Id";
             return context.SqlConnection.Query<Product>(command, new { Id = id }).FirstOrDefault();
         }
 

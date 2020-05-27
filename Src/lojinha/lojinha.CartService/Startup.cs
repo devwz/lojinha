@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using lojinha.Order.Data;
+using lojinha.Core.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace lojinha.Order
+namespace lojinha.CartService
 {
     public class Startup
     {
@@ -25,8 +25,9 @@ namespace lojinha.Order
         {
             services.AddControllers();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
+            services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("LocalConnection")));
+
+            services.AddScoped<CartRepo>();
 
             services.AddCors(options =>
             {
@@ -49,6 +50,8 @@ namespace lojinha.Order
             }
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

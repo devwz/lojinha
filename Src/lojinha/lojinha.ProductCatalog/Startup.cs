@@ -27,7 +27,7 @@ namespace lojinha.ProductCatalog
         {
             services.AddControllers();
 
-            services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("LocalConnection")));
 
             services.AddScoped<ProductRepo>();
 

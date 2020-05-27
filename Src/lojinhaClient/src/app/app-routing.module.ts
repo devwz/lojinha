@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'checkout', component: CheckoutComponent,
     children: [
-      { path: ':id', component: CheckoutComponent }
+      { path: '', component: CheckoutComponent }
     ]
   }
 ];

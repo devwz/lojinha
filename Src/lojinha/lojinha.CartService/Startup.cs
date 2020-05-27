@@ -34,6 +34,8 @@ namespace lojinha.CartService
                 options.AddDefaultPolicy(
                     builder =>
                     {
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
                         builder.AllowAnyOrigin();
                     });
             });

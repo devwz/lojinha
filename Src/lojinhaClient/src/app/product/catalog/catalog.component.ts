@@ -22,6 +22,6 @@ export class ProductCatalogComponent implements OnInit {
 
   getProductCatalog(): void {
     this.productService.getProductCatalog()
-    .subscribe(productCatalog => this.productCatalog = productCatalog)
+      .subscribe(productCatalog => this.productCatalog = productCatalog)
   }
 }

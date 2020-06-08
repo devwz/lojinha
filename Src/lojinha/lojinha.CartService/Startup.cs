@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using lojinha.Core.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +24,12 @@ namespace lojinha.CartService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddControllers();
 
             services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("LocalConnection")));
@@ -34,9 +41,10 @@ namespace lojinha.CartService
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.AllowAnyHeader();
-                        builder.AllowAnyMethod();
-                        builder.AllowAnyOrigin();
+                        builder.SetIsOriginAllowed(_ => true)
+                            .AllowCredentials()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
                     });
             });
         }
@@ -50,6 +58,8 @@ namespace lojinha.CartService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCookiePolicy();
 
             app.UseRouting();
 

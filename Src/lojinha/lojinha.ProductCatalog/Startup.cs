@@ -36,7 +36,10 @@ namespace lojinha.ProductCatalog
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.AllowAnyOrigin();
+                        builder.SetIsOriginAllowed(_ => true)
+                            .AllowCredentials()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
                     });
             });
         }

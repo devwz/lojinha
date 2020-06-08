@@ -1,3 +1,13 @@
 <app-header></app-header>
+
+<div class="container" *ngIf="showAlert">
+    <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+        You should check for continue. <a href="#">Policy</a>
+        <button (click)="acceptCookiePolicy()" type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="">
+            <span aria-hidden="true">Accept</span>
+        </button>
+    </div>
+</div>
+
 <router-outlet></router-outlet>
 <app-footer></app-footer>

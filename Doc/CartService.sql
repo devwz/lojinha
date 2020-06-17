@@ -94,7 +94,7 @@ CREATE PROCEDURE Update_Cart
 	@Cart_Id INT
 )
 AS BEGIN
-	IF EXISTS (SELECT TOP(1) * FROM [dbo].[CartItem] WHERE Id = @Id)
+	IF EXISTS (SELECT TOP(1) * FROM [dbo].[CartItem] WHERE Id = @Id AND Cart_Id = @Cart_Id)
 		BEGIN
 			UPDATE [dbo].[Cart]
 			SET

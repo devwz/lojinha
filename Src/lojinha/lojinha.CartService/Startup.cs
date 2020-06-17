@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using lojinha.CartService.Interfaces;
 using lojinha.Core.Data;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,13 +34,15 @@ namespace lojinha.CartService
             services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("LocalConnection")));
 
             services.AddScoped<CartRepo>();
+            services.AddScoped<ICartService, Services.CartService>();
 
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.SetIsOriginAllowed(_ => true)
+                        builder
+                            .WithOrigins("http://localhost:4200")
                             .AllowCredentials()
                             .AllowAnyHeader()
                             .AllowAnyMethod();

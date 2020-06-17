@@ -1,9 +1,10 @@
-export interface Cart {
-    cartKey: string;
-    item: CartItem[];
+export interface CartItem {
+    unid: number;
+    id: number;
 }
 
-export interface CartItem {
+export interface Cart {
+    cartKey: string;
+    cartItem: CartItem[];
     id: number;
-    unid: number;
 }

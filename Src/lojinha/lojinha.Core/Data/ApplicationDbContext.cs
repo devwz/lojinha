@@ -7,6 +7,11 @@ namespace lojinha.Core.Data
 {
     public class ApplicationDbContext
     {
+        public ApplicationDbContext()
+        {
+
+        }
+
         public ApplicationDbContext(string strCon)
         {
             SqlConnection = new SqlConnection(strCon);

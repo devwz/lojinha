@@ -5,7 +5,8 @@ import { Cart, CartItem } from './cart';
 const httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json'
-    })
+    }),
+    withCredentials: true
 };
 
 @Injectable()
@@ -14,15 +15,9 @@ export class CartService {
 
     constructor(private http: HttpClient) { }
 
-    // GET api/cart/count
-    getCartItemCount() {
-        const url = `${this.apiUrl}/count`;
-        return this.http.get(url);
-    }
-
     // GET api/cart
     getCart() {
-        return this.http.get<Cart>(this.apiUrl);
+        return this.http.get<Cart>(this.apiUrl, httpOptions);
     }
 
     // POST api/cart

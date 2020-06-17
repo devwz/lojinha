@@ -6,45 +6,41 @@
 
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">You cart</span>
-                <!-- <span class="badge badge-info badge-pill">1</span> -->
+                <span class="badge badge-info badge-pill">0</span>
             </h4>
 
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between">
+            <ul *ngIf="cart" class="list-group mb-3">
+
+                <li *ngFor="let cartItem of cart.cartItem" class="list-group-item d-flex justify-content-between">
                     <div>
-                        <h6 class="my-0">Title 1</h6>
+                        <h6 class="my-0">Title</h6>
                         <small class="text-muted">Brief</small>
                     </div>
-                    <span class="text-muted">$ 8</span>
+                    <span class="text-muted">$ 0</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <div>
-                        <h6 class="my-0">Title 2</h6>
-                        <small class="text-muted">Brief</small>
-                    </div>
-                    <span class="text-muted">$ 6</span>
-                </li>
+
                 <li class="list-group-item d-flex justify-content-between bg-light">
                     <div class="text-success">
-                        <h6 class="my-0">Code</h6>
+                        <h6 class="my-0">Discount</h6>
                         <small>CODE</small>
                     </div>
-                    <span class="text-success">- $ 7</span>
+                    <span class="text-success">- $ 0</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total ($)</span>
-                    <strong>$ 8</strong>
+                    <strong>$ 0</strong>
                 </li>
             </ul>
 
-            <form class="card p-2">
+            <!-- form -->
+            <div class="card p-2">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Promo code">
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-info">Resgatar</button>
+                        <button class="btn btn-info">Resgatar</button>
                     </div>
                 </div>
-            </form>
+            </div>
 
         </div>
 
@@ -52,7 +48,8 @@
 
             <h4 class="mb-3">Endereço</h4>
 
-            <form class="validation" novalidate>
+            <!-- form -->
+            <div class="validation" novalidate>
 
                 <div class="row">
                     
@@ -188,7 +185,7 @@
 
                 <button class="btn btn-success btn-lg btn-block" type="submit">Concluir</button>
 
-            </form>
+            </div>
 
         </div>
 

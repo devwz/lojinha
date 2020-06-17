@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CookiePolicyService } from './cart/cookiePolicy.service';
-import { Cookie } from './cart/cookie';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +20,32 @@ export class AppComponent {
   ) { }
 
   ngOnInit(): void {
-    this.checkShowAlert();
+    this.verifyCookieCache();
   }
 
-  checkShowAlert(): void {
-    this.cookiePolicyService.checkShowAlert()
-      .subscribe(showAlert => this.showAlert = showAlert);
+  verifyCookieCache(): void {
+    let cookieString = this.getCookie(".AspNet.Consent");
+    if (cookieString == "")
+    {
+      this.showAlert = true;
+    }
+  }
+
+  getCookie(cookieName: string): string {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookieCollection = decodedCookie.split(';');
+    
+    for (let i = 0; i < cookieCollection.length; i++) {
+      let cookie = cookieCollection[i];
+      while (cookie.charAt(0) == ' ') {
+        cookie = cookie.substr(1);
+      }
+      if (cookie.indexOf(name) == 0) {
+        return cookie.substr(name.length, cookie.length);
+      }
+    }
+    return "";
   }
 
   acceptCookiePolicy(): void {

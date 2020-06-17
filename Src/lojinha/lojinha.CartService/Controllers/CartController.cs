@@ -1,5 +1,5 @@
 ﻿using lojinha.CartService.Data;
-using lojinha.Core.Data;
+using lojinha.CartService.Interfaces;
 using lojinha.Core.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +13,11 @@ namespace lojinha.CartService.Controllers
     [Route("api/[controller]")]
     public class CartController : Controller
     {
-        readonly CartRepo repo;
+        readonly ICartService _cartService;
 
-        public CartController(CartRepo repo)
+        public CartController(ICartService cartService)
         {
-            this.repo = repo;
+            _cartService = cartService;
         }
 
         // GET api/cart
@@ -25,63 +25,6 @@ namespace lojinha.CartService.Controllers
         public ActionResult<Cart> Get()
         {
             return GetCart();
-        }
-
-        // GET api/cart/count
-        [HttpGet("count")]
-        public int GetCartItemCount()
-        {
-            return GetCart().Item.Sum(item => item.Unid);
-        }
-        
-        Cart GetCart()
-        {
-            // login here
-
-            string cartKey = GetCartIdFromCookie();
-
-            if (cartKey == null)
-            {
-                return new Cart();
-            }
-
-            return GetOrCreateCart(cartKey);
-        }
-
-        string GetCartIdFromCookie()
-        {
-            if (Request.Cookies.ContainsKey("lojinha"))
-            {
-                return Request.Cookies["lojinha"];
-            }
-
-            return null;
-        }
-
-        // Service
-        Cart GetOrCreateCart(string cartKey)
-        {
-            Cart cart = repo.Find(cartKey);
-
-            if (cart == null)
-            {
-                return CreateCart(cartKey);
-            }
-
-            return cart;
-        }
-
-        // Service
-        Cart CreateCart(string cartKey)
-        {
-            Cart cart = new Cart()
-            {
-                CartKey = cartKey
-            };
-
-            repo.Add(cart);
-
-            return cart;
         }
 
         // GET api/cart/5
@@ -95,41 +38,22 @@ namespace lojinha.CartService.Controllers
         [HttpPost]
         public ActionResult<Cart> Post(CartItem obj)
         {
-            if (obj.Unid == 0)
-            {
-                return NoContent();
-            }
+            Cart cart = new Cart();
 
             string cartKey = GetOrCreateCartCookie();
-            Cart cart = GetOrCreateCart(cartKey);
 
-            cart.Add(obj.Id, obj.Unid);
-            repo.Update(cart);
-
-            cart = GetOrCreateCart(cartKey);
-
-            return CreatedAtAction("Get", new { cartKey = cart.CartKey }, cart);
-        }
-
-        string GetOrCreateCartCookie()
-        {
-            string cartKey;
-
-            if (Request.Cookies.ContainsKey("lojinha"))
+            if (cartKey != null)
             {
-                cartKey = Request.Cookies["lojinha"];
+                cart = _cartService.GetOrCreateCart(cartKey);
 
-                if (cartKey != null)
-                {
-                    return cartKey;
-                }
+                _cartService.AddCartItem(cart, obj);
+
+                cart = _cartService.GetOrCreateCart(cartKey);
+
+                return CreatedAtAction("Get", new { cartKey = cart.CartKey }, cart);
             }
 
-            cartKey = Guid.NewGuid().ToString().ToUpper();
-
-            Response.Cookies.Append("lojinha", cartKey);
-
-            return cartKey;
+            return cart;
         }
 
         // PUT api/cart/5
@@ -153,6 +77,59 @@ namespace lojinha.CartService.Controllers
             // delete here
 
             return NoContent();
+        }
+
+        Cart GetCart()
+        {
+            // login here
+
+            string cartKey = GetCartIdFromCookie();
+
+            if (cartKey == null)
+            {
+                return new Cart();
+            }
+
+            return _cartService.GetOrCreateCart(cartKey);
+        }
+
+        string GetCartIdFromCookie()
+        {
+            if (Request.Cookies.ContainsKey(Constants.BASKET_COOKIENAME))
+            {
+                return Request.Cookies[Constants.BASKET_COOKIENAME];
+            }
+
+            return null;
+        }
+
+        string GetOrCreateCartCookie()
+        {
+            // login here
+
+            string cartKey;
+
+            if (Request.Cookies.ContainsKey(Constants.BASKET_COOKIENAME))
+            {
+                cartKey = Request.Cookies[Constants.BASKET_COOKIENAME];
+
+                if (cartKey != null)
+                {
+                    return cartKey;
+                }
+            }
+
+            cartKey = Guid.NewGuid().ToString().ToUpper();
+
+            var cookieOptions = new CookieOptions
+            {
+                IsEssential = true,
+                Expires = DateTime.Today.AddYears(1)
+            };
+
+            Response.Cookies.Append(Constants.BASKET_COOKIENAME, cartKey, cookieOptions);
+
+            return cartKey;
         }
     }
 }

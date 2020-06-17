@@ -7,14 +7,19 @@ namespace lojinha.Core.Domain
 {
     public class Cart : Generic
     {
+        public Cart()
+        {
+            CartItem = new List<CartItem>();
+        }
+
         public string CartKey { get; set; }
-        public List<CartItem> Item = new List<CartItem>();
+        public List<CartItem> CartItem { get; set; }
 
         public void Add(int id, int unid = 1)
         {
-            if (!Item.AsReadOnly().Any(i => i.Id == id))
+            if (!CartItem.AsReadOnly().Any(i => i.Id == id))
             {
-                Item.Add(new CartItem()
+                CartItem.Add(new CartItem()
                 {
                     Id = id,
                     Unid = unid
@@ -22,7 +27,7 @@ namespace lojinha.Core.Domain
                 return;
             }
 
-            CartItem item = Item.AsReadOnly().FirstOrDefault(i => i.Id == id);
+            CartItem item = CartItem.AsReadOnly().FirstOrDefault(i => i.Id == id);
             item.Unid = unid;
         }
     }

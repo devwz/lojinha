@@ -12,22 +12,15 @@ import { Cart } from '../cart/cart';
   providers: [ CartService ]
 })
 export class CheckoutComponent implements OnInit {
-  cartItemCount: Object;
   cart: Cart;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.getCartItemCount();
     this.getCart();
   }
 
-  getCartItemCount() : void {
-    this.cartService.getCartItemCount()
-      .subscribe(cartItemCount => this.cartItemCount = cartItemCount);
-  }
-
-  getCart() : void {
+  getCart(): void {
     this.cartService.getCart()
       .subscribe(cart => this.cart = cart);
   }

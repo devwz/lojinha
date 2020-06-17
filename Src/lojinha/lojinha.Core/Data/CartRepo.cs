@@ -41,7 +41,7 @@ namespace lojinha.Core.Data
         {
             Dictionary<int, Cart> keyValuePair = new Dictionary<int, Cart>();
 
-            string command = "SELECT * FROM All_Cart C JOIN All_CartItem CI ON C.Id = CI.Cart_Id WHERE CartKey = @CartKey";
+            string command = "SELECT * FROM All_Cart C LEFT JOIN All_CartItem CI ON C.Id = CI.Cart_Id WHERE C.CartKey = @CartKey";
             return context.SqlConnection.Query<Cart, CartItem, Cart>(
                 command,
                 param: new { CartKey = id },
@@ -50,11 +50,11 @@ namespace lojinha.Core.Data
                     if (!keyValuePair.TryGetValue(cart.Id, out Cart obj))
                     {
                         obj = cart;
-                        obj.Item = new List<CartItem>();
+                        obj.CartItem = new List<CartItem>();
                         keyValuePair.Add(obj.Id, obj);
                     }
 
-                    obj.Item.Add(cartItem);
+                    obj.CartItem.Add(cartItem);
                     return obj;
                 },
                 splitOn: "Id")
@@ -64,10 +64,10 @@ namespace lojinha.Core.Data
 
         public override void Update(Cart obj)
         {
-            object[] cartItem = new object[obj.Item.Count()];
-            for (int i = 0; i < obj.Item.Count(); i++)
+            object[] cartItem = new object[obj.CartItem.Count()];
+            for (int i = 0; i < obj.CartItem.Count(); i++)
             {
-                cartItem[i] = new { obj.Item[i].Id, obj.Item[i].Unid, Cart_Id = obj.Id };
+                cartItem[i] = new { obj.CartItem[i].Id, obj.CartItem[i].Unid, Cart_Id = obj.Id };
             }
 
             string command = "Update_Cart";

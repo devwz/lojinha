@@ -16,7 +16,10 @@ GO
 CREATE TABLE [dbo].[CartItem]
 (
 	[Id] INT NOT NULL,
-	[Unid] INT NOT NULL,
+	[ImgUrl] NVARCHAR(128),
+	[Price] DECIMAL(10,2) NOT NULL,
+	[Title] NVARCHAR(64) NOT NULL,
+	[Unit] INT NOT NULL,
 	[Cart_Id] INT FOREIGN KEY REFERENCES [dbo].[Cart]([Id]) NOT NULL,
 	[Created] DATETIME DEFAULT(GETDATE()),
     [Modified] DATETIME DEFAULT(GETDATE())
@@ -43,17 +46,20 @@ GO
 CREATE PROCEDURE Add_CartItem
 (
 	@Id INT,
-	@Unid INT,
+	@ImgUrl NVARCHAR(128),
+	@Price DECIMAL(10,2),
+	@Title NVARCHAR(64),
+	@Unit INT,
 	@Cart_Id INT
 )
 AS BEGIN
 	INSERT INTO [dbo].[CartItem]
 	(
-		[Id], [Unid], [Cart_Id]
+		[Id], [ImgUrl], [Price], [Title], [Unit], [Cart_Id]
 	)
 	VALUES
 	(
-		@Id, @Unid, @Cart_Id
+		@Id, @ImgUrl, @Price, @Title, @Unit, @Cart_Id
 	)
 END
 GO
@@ -70,7 +76,10 @@ GO
 CREATE VIEW All_CartItem
 AS
 SELECT [Id],
-	[Unid],
+	[ImgUrl],
+	[Price],
+	[Title],
+	[Unit],
 	[Cart_Id],
 	[Created],
     [Modified]
@@ -90,7 +99,10 @@ GO
 CREATE PROCEDURE Update_Cart
 (
 	@Id INT,
-	@Unid INT,
+	@ImgUrl NVARCHAR(128),
+	@Price DECIMAL(10,2),
+	@Title NVARCHAR(64),
+	@Unit INT,
 	@Cart_Id INT
 )
 AS BEGIN
@@ -102,11 +114,11 @@ AS BEGIN
 			WHERE [Id] = @Id
 			UPDATE [dbo].[CartItem]
 			SET
-				[Unid] = @Unid,
+				[Unit] = @Unit,
 				[Modified] = GETDATE()
 			WHERE [Id] = @Id
 		END
 	ELSE
-		EXECUTE Add_CartItem @Id, @Unid, @Cart_Id
+		EXECUTE Add_CartItem @Id, @ImgUrl, @Price, @Title, @Unit, @Cart_Id
 END
 GO

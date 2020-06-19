@@ -44,7 +44,7 @@ namespace lojinha.CartService.Services
 
         public void AddCartItem(Cart cart, CartItem cartItem)
         {
-            cart.Add(cartItem.Id, cartItem.Unid);
+            cart.Add(cartItem.Id, cartItem.ImgUrl, cartItem.Price, cartItem.Title, cartItem.Unit);
 
             _repo.Update(cart);
         }

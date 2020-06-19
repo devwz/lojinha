@@ -65,9 +65,17 @@ namespace lojinha.Core.Data
         public override void Update(Cart obj)
         {
             object[] cartItem = new object[obj.CartItem.Count()];
+
             for (int i = 0; i < obj.CartItem.Count(); i++)
             {
-                cartItem[i] = new { obj.CartItem[i].Id, obj.CartItem[i].Unid, Cart_Id = obj.Id };
+                cartItem[i] = new {
+                    obj.CartItem[i].Id,
+                    obj.CartItem[i].ImgUrl,
+                    obj.CartItem[i].Price,
+                    obj.CartItem[i].Title,
+                    obj.CartItem[i].Unit,
+                    Cart_Id = obj.Id
+                };
             }
 
             string command = "Update_Cart";

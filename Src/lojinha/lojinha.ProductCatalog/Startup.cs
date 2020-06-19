@@ -36,7 +36,8 @@ namespace lojinha.ProductCatalog
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.SetIsOriginAllowed(_ => true)
+                        builder
+                            .WithOrigins("http://localhost:4200")
                             .AllowCredentials()
                             .AllowAnyHeader()
                             .AllowAnyMethod();

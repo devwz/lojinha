@@ -15,11 +15,6 @@ export class CookiePolicyService {
     constructor(private http: HttpClient) { }
 
     // POST api/cookiePolicy
-    checkShowAlert() {
-        return this.http.get<boolean>(this.apiUrl, httpOptions);
-    }
-
-    // POST api/cookiePolicy
     acceptCookiePolicy() {
         return this.http.post<string>(this.apiUrl, null, httpOptions);
     }

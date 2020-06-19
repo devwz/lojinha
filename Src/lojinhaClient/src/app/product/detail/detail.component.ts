@@ -4,8 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
-import { CartService } from 'src/app/cart/cart.service';
 import { CartItem } from 'src/app/cart/cart';
+import { CartService } from 'src/app/cart/cart.service';
+
 
 @Component({
   selector: 'app-detail',
@@ -32,15 +33,16 @@ export class ProductDetailComponent implements OnInit {
     this.getProduct();
   }
 
-  addToCart(id: number, unid: number): void {
-    this.cartService.addCartItem({ id, unid } as CartItem)
-      .subscribe(() => {
-        this.router.navigate(['/checkout']);
-      })
+  addToCart(id: number, imgUrl: string, price: number, title: string, unit: number): void {
+    let cartItem: CartItem = { id: id, imgUrl: imgUrl, price: price, title: title, unit: unit };
+    this.cartService.addCartItem(cartItem)
+      .subscribe(cart => {
+        this.router.navigate(['/cart']);
+      });
   }
 
   getProduct(): void {
     this.productService.getProduct(this.route.snapshot.params['id'])
-    .subscribe(product => this.product = product);
+      .subscribe(product => this.product = product);
   }
 }

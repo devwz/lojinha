@@ -22,6 +22,6 @@ export class CartService {
 
     // POST api/cart
     addCartItem(cartItem: CartItem) {
-        return this.http.post<CartItem>(this.apiUrl, cartItem, httpOptions)
+        return this.http.post<Cart>(this.apiUrl, cartItem, httpOptions)
     }
 }

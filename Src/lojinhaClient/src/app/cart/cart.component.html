@@ -1,0 +1,48 @@
+<div *ngIf="cart" class="container mt-3">
+
+    <div *ngFor="let cartItem of cart.cartItem" class="card mb-3">
+        <div class="card-header">
+            1
+            <span class="float-right text-muted">Deletar</span>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-3 d-none d-md-block">
+                    <img src="{{ cartItem.imgUrl }}" class="card-img" alt="...">
+                </div>
+
+                <div class="col">
+                    <p class="card-title">{{ cartItem.title }}</p>
+                    <p class="card-subtitle text-muted">$ {{ cartItem.price }}</p>
+                </div>
+
+                <div class="col-4 col-lg-2">
+                    <p class="card-title text-center">Unid</p>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <button (click)="addOrSubtractUnit(cartItem, -1)" type="button" class="btn btn-secondary">
+                                <span aria-hidden="true">&#9665;</span>
+                            </button>
+                          </div>
+                          <label type="text" class="form-control text-center">{{ cartItem.unit }}</label>
+                          <div class="input-group-append">
+                            <button (click)="addOrSubtractUnit(cartItem, 1)" type="button" class="btn btn-secondary">
+                                <span aria-hidden="true">&#9655;</span>
+                            </button>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <p class="card-title text-center">Total</p>
+                    <h4 class="text-center text-success">$ {{ cartItem.total }}</h4>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

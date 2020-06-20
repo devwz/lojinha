@@ -1,13 +1,13 @@
-export interface CartItem {
+export interface Item {
     id: number;
     imgUrl: string;
     price: number;
     title: string;
-    unit: number;
+    unid: number;
 }
 
 export interface Cart {
     id: number;
     cartKey: string;
-    cartItem: CartItem[];
+    itemCollection: Item[];
 }

@@ -10,6 +10,7 @@ namespace lojinha.CartService.Interfaces
     {
         Cart GetOrCreateCart(string cartKey);
         Cart CreateCart(string cartKey);
-        void AddCartItem(Cart cart, CartItem cartItem);
+        void UpdateCart(Cart cart);
+        void Delete(int cartId, Item item);
     }
 }

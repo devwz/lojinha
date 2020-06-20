@@ -33,8 +33,7 @@ namespace lojinha.CartService.Services
         {
             Cart cart = new Cart()
             {
-                CartKey = cartKey,
-                CartItem = new List<CartItem>()
+                CartKey = cartKey
             };
 
             _repo.Add(cart);
@@ -42,11 +41,20 @@ namespace lojinha.CartService.Services
             return cart;
         }
 
-        public void AddCartItem(Cart cart, CartItem cartItem)
+        public void UpdateCart(Cart cart)
         {
-            cart.Add(cartItem.Id, cartItem.ImgUrl, cartItem.Price, cartItem.Title, cartItem.Unit);
+            if (cart.Id != 0)
+            {
+                _repo.Update(cart);
+            }
+        }
 
-            _repo.Update(cart);
+        public void Delete(int cartId, Item item)
+        {
+            if (cartId != 0)
+            {
+                _repo.Delete(cartId, item);
+            }
         }
     }
 }

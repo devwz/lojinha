@@ -36,7 +36,14 @@ namespace lojinha.CartService.Controllers
 
         // POST api/cart
         [HttpPost]
-        public ActionResult<Cart> Post(CartItem obj)
+        public ActionResult<Cart> Post(Cart cart)
+        {
+            throw new NotImplementedException();
+        }
+
+        // POST api/cart/item/add
+        [HttpPost("item/add")]
+        public ActionResult<Cart> Add(Item item)
         {
             Cart cart = new Cart();
 
@@ -46,12 +53,32 @@ namespace lojinha.CartService.Controllers
             {
                 cart = _cartService.GetOrCreateCart(cartKey);
 
-                _cartService.AddCartItem(cart, obj);
+                cart.Add(item);
+
+                _cartService.UpdateCart(cart);
 
                 cart = _cartService.GetOrCreateCart(cartKey);
 
                 return CreatedAtAction("Get", new { cartKey = cart.CartKey }, cart);
             }
+
+            return cart;
+        }
+
+        // POST api/cart/item/delete
+        [HttpPost("item/delete")]
+        public ActionResult<Cart> Delete(Item item)
+        {
+            Cart cart = GetCart();
+
+            if (cart.CartKey == null)
+            {
+                return NotFound();
+            }
+
+            _cartService.Delete(cart.Id, item);
+
+            cart = _cartService.GetOrCreateCart(cart.CartKey);
 
             return cart;
         }
@@ -67,16 +94,7 @@ namespace lojinha.CartService.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Cart> Delete(int id)
         {
-            Cart cart = GetCart();
-
-            if (cart.CartKey == null)
-            {
-                return NotFound();
-            }
-
-            // delete here
-
-            return NoContent();
+            throw new NotImplementedException();
         }
 
         Cart GetCart()

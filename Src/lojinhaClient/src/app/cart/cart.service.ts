@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cart, CartItem } from './cart';
+import { Cart, Item } from './cart';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -20,8 +20,15 @@ export class CartService {
         return this.http.get<Cart>(this.apiUrl, httpOptions);
     }
 
-    // POST api/cart
-    addCartItem(cartItem: CartItem) {
-        return this.http.post<Cart>(this.apiUrl, cartItem, httpOptions)
+    // POST api/cart/item/add
+    add(item: Item) {
+        const url = this.apiUrl.concat('/item/add');
+        return this.http.post<Cart>(url, item, httpOptions)
+    }
+
+    // POST api/cart/item/delete
+    delete(item: Item) {
+        const url = this.apiUrl.concat('/item/delete');
+        return this.http.post<Cart>(url, item, httpOptions)
     }
 }

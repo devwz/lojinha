@@ -37,24 +37,37 @@ namespace lojinha.Core.Data
             throw new NotImplementedException();
         }
 
+        public void Delete(int cartId, Item item)
+        {
+            string command = "Delete_Item";
+            context.SqlConnection.ExecuteScalar<Int32>(
+                command,
+                new { item.Id, Cart_Id = cartId },
+                commandType: CommandType.StoredProcedure);
+        }
+
         public override Cart Find(object id)
         {
             Dictionary<int, Cart> keyValuePair = new Dictionary<int, Cart>();
 
             string command = "SELECT * FROM All_Cart C LEFT JOIN All_CartItem CI ON C.Id = CI.Cart_Id WHERE C.CartKey = @CartKey";
-            return context.SqlConnection.Query<Cart, CartItem, Cart>(
+            return context.SqlConnection.Query<Cart, Item, Cart>(
                 command,
                 param: new { CartKey = id },
-                map: (cart, cartItem) =>
+                map: (cart, item) =>
                 {
                     if (!keyValuePair.TryGetValue(cart.Id, out Cart obj))
                     {
                         obj = cart;
-                        obj.CartItem = new List<CartItem>();
+                        obj.ItemCollection = new List<Item>();
                         keyValuePair.Add(obj.Id, obj);
                     }
 
-                    obj.CartItem.Add(cartItem);
+                    if (item != null)
+                    {
+                        obj.ItemCollection.Add(item);
+                    }
+
                     return obj;
                 },
                 splitOn: "Id")
@@ -64,17 +77,18 @@ namespace lojinha.Core.Data
 
         public override void Update(Cart obj)
         {
-            object[] cartItem = new object[obj.CartItem.Count()];
+            object[] cartItem = new object[obj.ItemCollection.Count()];
 
-            for (int i = 0; i < obj.CartItem.Count(); i++)
+            for (int i = 0; i < obj.ItemCollection.Count(); i++)
             {
-                cartItem[i] = new {
-                    obj.CartItem[i].Id,
-                    obj.CartItem[i].ImgUrl,
-                    obj.CartItem[i].Price,
-                    obj.CartItem[i].Title,
-                    obj.CartItem[i].Unit,
-                    Cart_Id = obj.Id
+                cartItem[i] = new
+                {
+                    Cart_Id = obj.Id,
+                    obj.ItemCollection[i].Id,
+                    obj.ItemCollection[i].ImgUrl,
+                    obj.ItemCollection[i].Price,
+                    obj.ItemCollection[i].Title,
+                    obj.ItemCollection[i].Unid
                 };
             }
 

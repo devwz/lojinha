@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵsetCurrentInjector } from '@angular/core';
 
 import { CartService } from './cart.service';
-import { Cart, CartItem } from './cart';
+import { Cart, Item } from './cart';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +13,7 @@ import { Cart, CartItem } from './cart';
 })
 export class CartComponent implements OnInit {
   cart: Cart;
+  cartTotal: number;
 
   constructor(private cartService: CartService) { }
 
@@ -20,14 +21,39 @@ export class CartComponent implements OnInit {
     this.getCart();
   }
 
-  getCart(): void {
-    this.cartService.getCart()
-      .subscribe(cart => this.cart = cart);
+  getTotal(): number {
+    return this.cart.itemCollection.map((item) => item.price * item.unid).reduce((total, price) => total + price);
   }
 
-  addOrSubtractUnit(cartItem: CartItem, unit: number): void {
-    cartItem.unit += unit;
-    this.cartService.addCartItem(cartItem)
-      .subscribe(cart => this.cart = cart);
+  getCart(): void {
+    this.cartService.getCart()
+      .subscribe(cart => {
+        this.cart = cart;
+        this.cartTotal = this.getTotal();
+      });
+  }
+
+  addOrSubtract(item: Item, unid: number): void {
+
+    if (item.unid <= 0 && unid < 1)
+    {
+      return;
+    }
+
+    item.unid += unid;
+
+    this.cartService.add(item)
+      .subscribe(cart => {
+        this.cart = cart;
+        this.cartTotal = this.getTotal();
+      });
+  }
+
+  delete(item: Item): void {
+    this.cartService.delete(item)
+      .subscribe(cart => {
+        this.cart = cart;
+        this.cartTotal = this.getTotal();
+      })
   }
 }

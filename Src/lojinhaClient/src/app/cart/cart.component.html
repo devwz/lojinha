@@ -1,48 +1,110 @@
-<div *ngIf="cart" class="container mt-3">
 
-    <div *ngFor="let cartItem of cart.cartItem" class="card mb-3">
-        <div class="card-header">
-            1
-            <span class="float-right text-muted">Deletar</span>
+<div class="container">
+
+    <div class="row">
+        <div class="col mt-3 mb-3">
+            <h1 class="display-4">You cart</h1>
         </div>
-        <div class="card-body">
+    </div>
 
-            <div class="row">
+    <div class="row">
 
-                <div class="col-3 d-none d-md-block">
-                    <img src="{{ cartItem.imgUrl }}" class="card-img" alt="...">
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <article class="row">
+                        <section class="col">Product</section>
+                        <section class="col-4 col-lg-2 text-center">Unid</section>
+                        <section class="col-3 text-center">Total</section>
+                    </article>
                 </div>
+            </div>
+        </div>
 
-                <div class="col">
-                    <p class="card-title">{{ cartItem.title }}</p>
-                    <p class="card-subtitle text-muted">$ {{ cartItem.price }}</p>
+        <div *ngIf="cart" class="col-12">
+            <div *ngFor="let item of cart.itemCollection" class="card mb-3">
+                <div class="card-header">
+                    1
+                    <button (click)="delete(item)" class="btn btn-default float-right text-muted">Deletar</button>
                 </div>
+                <div class="card-body">
+                    <div class="row">
+                        
+                        <!-- ImgUrl -->
+                        <div class="col-3 d-none d-md-block">
+                            <img src="{{ item.imgUrl }}" class="card-img" alt="...">
+                        </div>
 
-                <div class="col-4 col-lg-2">
-                    <p class="card-title text-center">Unid</p>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button (click)="addOrSubtractUnit(cartItem, -1)" type="button" class="btn btn-secondary">
-                                <span aria-hidden="true">&#9665;</span>
-                            </button>
-                          </div>
-                          <label type="text" class="form-control text-center">{{ cartItem.unit }}</label>
-                          <div class="input-group-append">
-                            <button (click)="addOrSubtractUnit(cartItem, 1)" type="button" class="btn btn-secondary">
-                                <span aria-hidden="true">&#9655;</span>
-                            </button>
-                          </div>
+                        <!-- Title -->
+                        <div class="col">
+                            <p class="card-title">{{ item.title }}</p>
+                            <p class="card-subtitle text-muted">$ {{ item.price }}</p>
+                        </div>
+                        
+                        <!-- Unid -->
+                        <div class="col-4 col-lg-2">
+                            <p class="card-title text-center">Unid</p>
+                            <div class="input-group input-group-sm">
+                                
+                                <div class="input-group-prepend">
+                                    <button (click)="addOrSubtract(item, -1)" type="button" class="btn btn-secondary">
+                                        <span aria-hidden="true">&#9665;</span>
+                                    </button>
+                                  </div>
+
+                                  <label type="text" class="form-control text-center">{{ item.unid }}</label>
+                                  
+                                  <div class="input-group-append">
+                                      <button (click)="addOrSubtract(item, 1)" type="button" class="btn btn-secondary">
+                                          <span aria-hidden="true">&#9655;</span>
+                                    </button>
+                                  </div>
+
+                            </div>
+                        </div>
+                        
+                        <!-- Total -->
+                        <div class="col-3">
+                            <p class="card-title text-center">Total</p>
+                            <h4 class="text-center text-success">$ {{ item.price * item.unid }}</h4>
+                        </div>
+        
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="col-3">
-                    <p class="card-title text-center">Total</p>
-                    <h4 class="text-center text-success">$ {{ cartItem.total }}</h4>
+        <div class="col-12">
+            <div class="row">
+
+                <div class="col-md-6">
+                    
+                </div>
+
+                <!-- Total -->
+                <div class="col-md-6">
+
+                    <ul class="list-group mb-3">
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>Total</div>
+                            <span>
+                                <h2 class="text-success my-0">$ {{ cartTotal }}</h2>
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <div class="text-right">
+                        <button type="button" routerLink="/" class="btn btn-default ml-3">Continuar comprando</button>
+                        <button type="button" routerLink="/checkout" class="btn btn-success ml-3">Concluir compra</button>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
+
     </div>
 
 </div>

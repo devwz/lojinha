@@ -15,6 +15,6 @@ namespace lojinha.CartService.Data
         }
 
         public DbSet<Cart> Cart { get; set; }
-        public DbSet<CartItem> CartItem { get; set; }
+        public DbSet<Item> CartItem { get; set; }
     }
 }

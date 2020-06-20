@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace lojinha.CartService.Controllers
 {
@@ -12,25 +11,12 @@ namespace lojinha.CartService.Controllers
     [Route("api/[controller]")]
     public class CookiePolicyController : Controller
     {
-        // GET api/cart/cookiePolicy
-        [HttpGet]
-        public ActionResult<bool> CookiePolicy()
-        {
-            var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
-            var showAlert = !consentFeature?.CanTrack ?? false;
-
-            return showAlert;
-        }
-
-        // POST api/cart/cookiePolicy
+        // POST api/cookiePolicy
         [HttpPost]
-        public ActionResult<string> CreateConsentCookie()
+        public ActionResult CreateConsentCookie()
         {
             var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
-            // var showAlert = !consentFeature?.CanTrack ?? false;
-            var cookieString = consentFeature?.CreateConsentCookie();
-
-            return new JsonResult(cookieString);
+            return Json(consentFeature?.CreateConsentCookie());
         }
     }
 }

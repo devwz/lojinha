@@ -11,16 +11,15 @@ import { CartService } from '../cart/cart.service';
   providers: [ CartService ]
 })
 export class HeaderComponent implements OnInit {
-  cartItemCount: Object;
+  cartItemLength: number;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.getCartItemCount();
   }
 
-  getCartItemCount() : void {
-    this.cartService.getCartItemCount()
-      .subscribe(cartItemCount => this.cartItemCount = cartItemCount);
+  getCart(): void {
+    this.cartService.getCart()
+      .subscribe(cart => this.cartItemLength = cart.itemCollection.length);
   }
 }

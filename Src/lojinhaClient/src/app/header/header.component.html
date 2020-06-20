@@ -1,19 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <a class="navbar-brand" href="#">Title</a>
+    <a class="navbar-brand" routerLink="/">lojinha</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" arial-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link">Item</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Item</a>
+                <a class="nav-link">Policy</a>
             </li>
         </ul>
-        <button type="button" class="btn btn-success">
-            Cart <span class="badge badge-light">{{ cartItemCount }}</span>
+        <button routerLink="/cart" type="button" class="btn btn-success">
+            Cart <!-- <span class="badge badge-light">{{ cartItemLength }}</span> -->
         </button>
     </div>
 </nav>

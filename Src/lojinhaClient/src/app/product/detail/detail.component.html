@@ -25,12 +25,18 @@
                 <div class="row">
                     <p class="lead">Preço</p>
                 </div>
+
                 <div class="row">
-                    <h2 class="text-muted">$ {{ product.price }}</h2>
+                    <h2 class="text-success mb-3">$ {{ product.price }}</h2>
                 </div>
+
                 <div class="row">
-                    <a [routerLink]="['/checkout/', product.id]" class="btn btn-success">Comprar</a>
+                    <div class="btn-group">
+                        <button (click)="addToCart(product.id, product.imgUrl, product.price, product.title, 1)"
+                            class="btn btn-success">Comprar</button>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -46,7 +52,7 @@
 
 </div>
 
-<div class="container">
+<div class="container d-none">
 
     <div class="row">
 

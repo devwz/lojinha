@@ -39,7 +39,7 @@ namespace lojinha.Core.Data
 
         public void Delete(int cartId, Item item)
         {
-            string command = "Delete_Item";
+            string command = "Delete_CartItem";
             context.SqlConnection.ExecuteScalar<Int32>(
                 command,
                 new { item.Id, Cart_Id = cartId },

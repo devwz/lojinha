@@ -96,6 +96,17 @@ AS BEGIN
 END
 GO
 
+CREATE PROCEDURE Delete_CartItem
+(
+	@Id INT,
+	@Cart_Id INT
+)
+AS BEGIN
+	DELETE FROM [dbo].[CartItem]
+	WHERE [Id] = @Id AND [Cart_Id] = @Cart_Id
+END
+GO
+
 CREATE PROCEDURE Update_Cart
 (
 	@Id INT,
@@ -120,16 +131,5 @@ AS BEGIN
 		END
 	ELSE
 		EXECUTE Add_CartItem @Id, @ImgUrl, @Price, @Title, @Unid, @Cart_Id
-END
-GO
-
-CREATE PROCEDURE Delete_Item
-(
-	@Id INT,
-	@Cart_Id INT
-)
-AS BEGIN
-	DELETE FROM [dbo].[CartItem]
-	WHERE [Id] = @Id AND [Cart_Id] = @Cart_Id
 END
 GO

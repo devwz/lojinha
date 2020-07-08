@@ -13,16 +13,8 @@ CREATE TABLE [dbo].[Product]
     [Price] DECIMAL(10,2) NOT NULL,
     [Title] NVARCHAR(64) NOT NULL,
 	[Created] DATETIME DEFAULT(GETDATE()),
-    [Modified] DATETIME DEFAULT(GETDATE()),
+    [Modified] DATETIME DEFAULT(GETDATE())
 )
-GO
-
-INSERT INTO [dbo].[Product] ([Title], [Price], [ImgUrl])
-VALUES
-	('Product 0', 8, '/assets/image_1.jpg'),
-	('Product 1', 6, '/assets/image_2.jpg'),
-	('Product 2', 4, '/assets/image_3.jpg'),
-	('Product 3', 2, '/assets/image_4.jpg')
 GO
 
 CREATE PROCEDURE Add_Product
@@ -48,13 +40,13 @@ GO
 CREATE VIEW All_Product
 AS
 SELECT [Id],
-    [Created],
-    [Modified],
     [Bio],
     [Enabled],
     [ImgUrl],
     [Price],
-    [Title]
+    [Title],
+    [Created],
+    [Modified]
 FROM [dbo].[Product]
 GO
 
@@ -79,12 +71,22 @@ CREATE PROCEDURE Update_Product
 )
 AS BEGIN
     UPDATE [dbo].[Product] SET
-        [Modified] = GETDATE(),
         [Bio] = @Bio,
         [Enabled] = @Enabled,
         [ImgUrl] = @ImgUrl,
         [Price] = @Price,
-        [Title] = @Title
+        [Title] = @Title,
+        [Modified] = GETDATE()
     WHERE [Id] = @Id
 END
+GO
+
+--
+
+INSERT INTO [dbo].[Product] ([Title], [Price], [ImgUrl])
+VALUES
+	('Product 0', 8, '/assets/image_1.jpg'),
+	('Product 1', 6, '/assets/image_2.jpg'),
+	('Product 2', 4, '/assets/image_3.jpg'),
+	('Product 3', 2, '/assets/image_4.jpg')
 GO

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using lojinha.Checkout.Data;
+using lojinha.Checkout.Interfaces;
+using lojinha.Core.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,17 +26,22 @@ namespace lojinha.Checkout
         {
             services.AddControllers();
 
-            // services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("LocalConnection")));
+            services.AddSingleton(new ApplicationDbContext(Configuration.GetConnectionString("LocalConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
+            services.AddScoped<OrderRepo>();
+            services.AddScoped<IOrderService, Services.OrderService>();
+            services.AddScoped<IPaymentService, Services.PaymentService>();
 
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.AllowAnyOrigin();
+                        builder
+                            .WithOrigins("http://localhost:4200")
+                            .AllowCredentials()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
                     });
             });
         }

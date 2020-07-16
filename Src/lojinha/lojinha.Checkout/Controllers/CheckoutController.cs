@@ -29,9 +29,16 @@ namespace lojinha.Checkout.Controllers
 
         // GET api/checkout/5
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public ActionResult<Order> Get(int id)
         {
-            throw new NotImplementedException();
+            Order obj = _orderService.FindOrder(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return obj;
         }
 
         // POST api/checkout
@@ -45,13 +52,11 @@ namespace lojinha.Checkout.Controllers
 
             _orderService.CreateOrder(order);
 
-            // verify quantities
+            order.Cart.DeleteEmptyItem();
 
             _paymentService.PayOrder();
 
             _orderService.UpdateOrder(order);
-
-            // delete cart
 
             return CreatedAtAction("Get", new { id = order.Id }, order);
         }

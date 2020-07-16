@@ -21,5 +21,10 @@ namespace lojinha.Core.Domain
             Item cartItem = ItemCollection.AsReadOnly().FirstOrDefault(i => i.Id == item.Id);
             cartItem.Unid = item.Unid;
         }
+
+        public void DeleteEmptyItem()
+        {
+            ItemCollection.RemoveAll(i => i.Unid == 0);
+        }
     }
 }

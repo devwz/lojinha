@@ -48,9 +48,12 @@ namespace lojinha.Core.Data
 
         public override Cart Find(object id)
         {
-            Dictionary<int, Cart> keyValuePair = new Dictionary<int, Cart>();
+            Dictionary<Int32, Cart> keyValuePair = new Dictionary<Int32, Cart>();
 
-            string command = "SELECT * FROM All_Cart C LEFT JOIN All_CartItem CI ON C.Id = CI.Cart_Id WHERE C.CartKey = @CartKey";
+            string command = "SELECT * FROM All_Cart C " +
+                "LEFT JOIN All_CartItem CI ON C.Id = CI.Cart_Id " +
+                "WHERE C.CartKey = @CartKey";
+
             return context.SqlConnection.Query<Cart, Item, Cart>(
                 command,
                 param: new { CartKey = id },

@@ -29,7 +29,8 @@ GO
 CREATE TABLE [dbo].[Order]
 (
     [Id] INT PRIMARY KEY IDENTITY(1,1),
-	[Method] NVARCHAR(128) NOT NULL,
+	[Condition] NVARCHAR(128) NOT NULL,
+	[OrderKey] NVARCHAR(64) NOT NULL,
 	[Client_Id] INT FOREIGN KEY REFERENCES [dbo].[Client]([Id]) NOT NULL,
 	[Created] DATETIME DEFAULT(GETDATE()),
     [Modified] DATETIME DEFAULT(GETDATE())
@@ -55,7 +56,8 @@ CREATE PROCEDURE Add_Order
 	@StateProvince NVARCHAR(128),
 	@CountryRegion NVARCHAR(56),
 	@PostalCode CHAR(8),
-	@Method NVARCHAR(128)
+	@Condition NVARCHAR(128),
+	@OrderKey NVARCHAR(64)
 )
 AS BEGIN
 
@@ -86,11 +88,11 @@ AS BEGIN
 
 	INSERT INTO [dbo].[Order]
 	(
-		[Method], [Client_Id]
+		[Condition], [OrderKey], [Client_Id]
 	)
 	VALUES
 	(
-		@Method, @Client_Id
+		@Condition, @OrderKey, @Client_Id
 	)
 
 	SELECT SCOPE_IDENTITY()
@@ -123,7 +125,8 @@ GO
 CREATE VIEW All_Order
 AS
 SELECT [Id],
-	[Method],
+	[Condition],
+	[OrderKey],
 	[Client_Id],
 	[Created],
     [Modified]

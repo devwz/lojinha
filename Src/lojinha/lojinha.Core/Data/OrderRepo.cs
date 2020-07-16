@@ -21,13 +21,15 @@ namespace lojinha.Core.Data
             string command = "Add_Order";
             return obj.Id = context.SqlConnection.ExecuteScalar<Int32>(
                 command,
-                new {
+                new
+                {
+                    obj.OrderKey,
                     obj.Client.Login,
                     obj.Client.Address.AddressLine,
                     obj.Client.Address.StateProvince,
                     obj.Client.Address.CountryRegion,
                     obj.Client.Address.PostalCode,
-                    Method = "Credit Card"
+                    Condition = "Ok"
                 },
                 commandType: CommandType.StoredProcedure);
         }
@@ -44,7 +46,42 @@ namespace lojinha.Core.Data
 
         public override Order Find(object id)
         {
-            throw new NotImplementedException();
+            Dictionary<Int32, Order> keyValuePair = new Dictionary<int, Order>();
+
+            string command = "SELECT * FROM All_Order O " +
+                "LEFT JOIN All_ProductOrder P ON P.Order_Id = O.Id " +
+                "JOIN All_Client C ON C.Id = O.Client_Id " +
+                "JOIN All_Address A ON A.Client_Id = C.Id " +
+                "WHERE O.Id = @Id";
+
+            return context.SqlConnection.Query<Order, Item, Client, Address, Order>(
+                command,
+                param: new { Id = id },
+                map: (order, item, client, address) =>
+                {
+                    if (!keyValuePair.TryGetValue(order.Id, out Order obj))
+                    {
+                        obj = order;
+                        obj.Client = client;
+                        obj.Client.Address = address;
+
+                        obj.Cart = new Cart
+                        {
+                            ItemCollection = new List<Item>()
+                        };
+                        keyValuePair.Add(obj.Id, obj);
+                    }
+
+                    if (item != null)
+                    {
+                        obj.Cart.Add(item);
+                    }
+
+                    return obj;
+                },
+                splitOn: "Id")
+                .Distinct()
+                .FirstOrDefault();
         }
 
         public override void Update(Order obj)

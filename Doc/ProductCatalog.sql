@@ -80,7 +80,7 @@ AS BEGIN
         [ImgUrl] = @ImgUrl,
         [Price] = @Price,
         [Title] = @Title,
-		[Type] = @Type
+		[Type] = @Type,
         [Modified] = GETDATE()
     WHERE [Id] = @Id
 END

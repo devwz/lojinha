@@ -22,6 +22,10 @@ export class CartComponent implements OnInit {
   }
 
   getTotal(): number {
+    if (this.cart.itemCollection.length == 0)
+    {
+      return 0;
+    }
     return this.cart.itemCollection.map((item) => item.price * item.unid).reduce((total, price) => total + price);
   }
 
@@ -35,9 +39,12 @@ export class CartComponent implements OnInit {
 
   addOrSubtract(item: Item, unid: number): void {
 
-    if (item.unid <= 0 && unid < 1)
+    if (item.unid == 1)
     {
-      return;
+      if (unid == -1)
+      {
+        return;
+      }
     }
 
     item.unid += unid;

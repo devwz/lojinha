@@ -22,7 +22,7 @@ namespace lojinha.Core.Data
             string command = "Add_Product";
             return obj.Id = context.SqlConnection.ExecuteScalar<Int32>(
                 command,
-                new { obj.Bio, obj.ImgUrl, obj.Price, obj.Title },
+                new { obj.Bio, obj.ImgUrl, obj.Price, obj.Title, obj.Type },
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -49,7 +49,7 @@ namespace lojinha.Core.Data
             string command = "Update_Product";
             context.SqlConnection.Execute(
                 command,
-                new { obj.Id, obj.Bio, obj.Enabled, obj.ImgUrl, obj.Price, obj.Title },
+                new { obj.Id, obj.Bio, obj.Enabled, obj.ImgUrl, obj.Price, obj.Title, obj.Type },
                 commandType: CommandType.StoredProcedure);
         }
     }

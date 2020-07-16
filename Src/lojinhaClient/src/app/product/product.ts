@@ -1,8 +1,9 @@
 export interface Product {
     id: number;
-    title: string;
-    price: number;
     bio: string;
-    imgUrl: string;
     enabled: boolean;
+    imgUrl: string;
+    price: number;
+    title: string;
+    type: string;
 }

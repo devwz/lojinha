@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductComponent } from './product/product.component';
 import { ProductCatalogComponent } from './product/catalog/catalog.component';
 import { ProductDetailComponent } from './product/detail/detail.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
@@ -24,11 +25,10 @@ const routes: Routes = [
     path: 'cart', component: CartComponent
   },
   {
-    path: 'checkout', component: CheckoutComponent,
-    children: [
-      { path: '', component: CheckoutComponent },
-      { path: ':id', component: CheckoutComponent }
-    ]
+    path: 'checkout', component: CheckoutComponent
+  },
+  {
+    path: 'order', component: OrderComponent
   }
 ];
 

@@ -9,8 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { ProductComponent } from './product/product.component';
 import { ProductCatalogComponent } from './product/catalog/catalog.component';
 import { ProductDetailComponent } from './product/detail/detail.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { CartComponent } from './cart/cart.component';
     ProductComponent,
     ProductCatalogComponent,
     ProductDetailComponent,
+    CartComponent,
     CheckoutComponent,
-    CartComponent
+    OrderComponent
   ],
   imports: [
     BrowserModule,

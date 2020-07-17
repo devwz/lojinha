@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
+  selector: 'app-order',
+  templateUrl: './order.component.html',
   styles: [
   ]
 })
-export class CheckoutComponent implements OnInit {
+export class OrderComponent implements OnInit {
 
   constructor() { }
 

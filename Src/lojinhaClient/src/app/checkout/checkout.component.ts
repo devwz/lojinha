@@ -11,6 +11,7 @@ import { Cart } from '../cart/cart';
 })
 export class CheckoutComponent implements OnInit {
   cart: Cart;
+  itemCollectionLength: number = 0;
 
   constructor(private cartService: CartService) { }
 

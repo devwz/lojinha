@@ -1,12 +1,200 @@
 <div class="container">
 
     <div class="row">
+        <div class="col mt-3 mb-3">
+            <h1 class="display-4">Checkout</h1>
+        </div>
+    </div>
 
+    <div class="row">
+
+        <!-- Cart -->
         <div class="col-md-4 order-md-2">
+
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">You cart</span>
+                <span class="badge badge-info badge-pill">{{ itemCollectionLength }}</span>
+            </h4>
+
+            <ul *ngIf="cart" class="list-group mb-3">
+
+                <li *ngFor="let item of cart.itemCollection" class="list-group-item d-flex justify-content-between">
+                    <div>
+                        <h6 class="my-0">{{ item.title }}</h6>
+                        <small class="text-muted">{{ item.unid }} x</small>
+                    </div>
+                    <span class="text-muted">$ {{ item.unid * item.price }}</span>
+                </li>
+
+                <!-- <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Discount</h6>
+                        <small>CODE</small>
+                    </div>
+                    <span class="text-success">- $ 0</span>
+                </li> -->
+
+                <li class="list-group-item d-flex justify-content-between">
+                    <div>Total $</div>
+                    <strong>$ {{ cartTotal }}</strong>
+                </li>
+
+            </ul>
+
+            <!-- form -->
+            <!-- <div class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code">
+                    <div class="input-group-append">
+                        <button class="btn btn-info">Resgatar</button>
+                    </div>
+                </div>
+            </div> -->
 
         </div>
 
+        <!-- Client -->
         <div class="col-md-8 order-md-1">
+
+            <div class="">
+
+                <h4 class="text-muted">Endereço</h4>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Nome é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="sobrenome">Sobrenome</label>
+                        <input type="text" class="form-control" id="sobrenome" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Sobrenome é obrigatório.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="nome@outlook.com">
+                        <div class="invalid-feedback">
+                            Informe um e-mail correto.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="address">Endereço</label>
+                        <input type="text" class="form-control" id="address" placeholder="123 Main St" required>
+                        <div class="invalid-feedback">
+                            Por favor, informe um endereço correto.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-5 mb-3">
+                        <label for="country">País</label>
+                        <select class="custom-select d-block w-100" id="country" required>
+                            <option value="">Selecione</option>
+                            <option>Brasil</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, informe o País.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="state">UF</label>
+                        <select class="custom-select d-block w-100" id="state" required>
+                            <option value="">Selecione</option>
+                            <option>São Paulo</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, informe um UF.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="postalCode">CEP</label>
+                        <input type="text" class="form-control" id="postalCode" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Por favor, informe um CEP correto.
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="mb-3">
+
+                <h4 class="text-muted mb-3">Pagamento</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                        <label class="custom-control-label" for="credit">Crédito</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                        <label class="custom-control-label" for="debit">Débito</label>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-name">Nome no cartão</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <small class="text-muted">Nome completo no cartão</small>
+                        <div class="invalid-feedback">
+                            Nome no cartão é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-number">Número do cartão</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Número do cartão é obrigatório.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3 md-3">
+                        <label for="ccexpiration">Validade</label>
+                        <input type="text" class="form-control" id="ccexpiration" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Validade do cartão é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Código de segurança obrigatório.
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="mb-3">
+
+                <button class="btn btn-success btn-lg btn-block" type="button">Concluir</button>
+
+            </div>
 
         </div>
 

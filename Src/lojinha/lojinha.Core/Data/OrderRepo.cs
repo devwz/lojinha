@@ -24,7 +24,9 @@ namespace lojinha.Core.Data
                 new
                 {
                     obj.OrderKey,
-                    obj.Client.Login,
+                    obj.Client.Name,
+                    obj.Client.Surname,
+                    obj.Client.Email,
                     obj.Client.Address.AddressLine,
                     obj.Client.Address.StateProvince,
                     obj.Client.Address.CountryRegion,

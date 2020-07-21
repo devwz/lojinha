@@ -7,7 +7,9 @@ GO
 CREATE TABLE [dbo].[Client]
 (
     [Id] INT PRIMARY KEY IDENTITY(1,1),
-	[Login] NVARCHAR(128) NOT NULL,
+	[Name] NVARCHAR(128) NOT NULL,
+	[Surname] NVARCHAR(128) NOT NULL,
+	[Email] NVARCHAR(256) NOT NULL,
 	[Created] DATETIME DEFAULT(GETDATE()),
     [Modified] DATETIME DEFAULT(GETDATE())
 )
@@ -51,7 +53,9 @@ GO
 
 CREATE PROCEDURE Add_Order
 (
-	@Login NVARCHAR(128),
+	@Name NVARCHAR(128),
+	@Surname NVARCHAR(128),
+	@Email NVARCHAR(256),
 	@AddressLine NVARCHAR(512),
 	@StateProvince NVARCHAR(128),
 	@CountryRegion NVARCHAR(56),
@@ -62,17 +66,17 @@ CREATE PROCEDURE Add_Order
 AS BEGIN
 
 	DECLARE @Client_Id INT
-	IF EXISTS (SELECT TOP(1) * FROM [dbo].[Client] WHERE [Login] = @Login)
-		SET @Client_Id = (SELECT [Id] FROM [dbo].[Client] WHERE [Login] = @Login)
+	IF EXISTS (SELECT TOP(1) * FROM [dbo].[Client] WHERE [Email] = @Email)
+		SET @Client_Id = (SELECT [Id] FROM [dbo].[Client] WHERE [Email] = @Email)
 	ELSE
 		BEGIN
 			INSERT INTO [dbo].[Client]
 			(
-				[Login]
+				[Name], [Surname], [Email]
 			)
 			VALUES
 			(
-				@Login
+				@Name, @Surname, @Email
 			)
 		SET @Client_Id = SCOPE_IDENTITY()
 	END
@@ -136,7 +140,9 @@ GO
 CREATE VIEW All_Client
 AS
 SELECT [Id],
-	[Login],
+	[Name],
+	[Surname],
+	[Email],
 	[Created],
     [Modified]
 FROM [dbo].[Client]

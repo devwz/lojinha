@@ -13,7 +13,7 @@
 
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">You cart</span>
-                <span class="badge badge-info badge-pill">{{ itemCollectionLength }}</span>
+                <span *ngIf="cart" class="badge badge-info badge-pill">{{ cart.itemCollection.length }}</span>
             </h4>
 
             <ul *ngIf="cart" class="list-group mb-3">
@@ -64,7 +64,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" placeholder="" required>
+                        <input type="text" class="form-control" id="nome" placeholder="" required value="Fulano">
                         <div class="invalid-feedback">
                             Nome é obrigatório.
                         </div>
@@ -72,7 +72,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="sobrenome">Sobrenome</label>
-                        <input type="text" class="form-control" id="sobrenome" placeholder="" required>
+                        <input type="text" class="form-control" id="sobrenome" placeholder="" required value="de Tal">
                         <div class="invalid-feedback">
                             Sobrenome é obrigatório.
                         </div>
@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col mb-3">
                         <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="nome@outlook.com">
+                        <input type="email" class="form-control" id="email" placeholder="nome@outlook.com" value="fulanodetal@outlook.com.br">
                         <div class="invalid-feedback">
                             Informe um e-mail correto.
                         </div>
@@ -93,7 +93,7 @@
                 <div class="row">
                     <div class="col mb-3">
                         <label for="address">Endereço</label>
-                        <input type="text" class="form-control" id="address" placeholder="123 Main St" required>
+                        <input type="text" class="form-control" id="address" placeholder="123 Main St" required value="Rua Fulano de Tal, 0 - Americana">
                         <div class="invalid-feedback">
                             Por favor, informe um endereço correto.
                         </div>
@@ -106,7 +106,7 @@
                         <label for="country">País</label>
                         <select class="custom-select d-block w-100" id="country" required>
                             <option value="">Selecione</option>
-                            <option>Brasil</option>
+                            <option selected>Brasil</option>
                         </select>
                         <div class="invalid-feedback">
                             Por favor, informe o País.
@@ -117,7 +117,7 @@
                         <label for="state">UF</label>
                         <select class="custom-select d-block w-100" id="state" required>
                             <option value="">Selecione</option>
-                            <option>São Paulo</option>
+                            <option selected>SP</option>
                         </select>
                         <div class="invalid-feedback">
                             Por favor, informe um UF.
@@ -126,7 +126,7 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="postalCode">CEP</label>
-                        <input type="text" class="form-control" id="postalCode" placeholder="" required>
+                        <input type="text" class="form-control" id="postalCode" placeholder="" required value="00000-000">
                         <div class="invalid-feedback">
                             Por favor, informe um CEP correto.
                         </div>
@@ -153,7 +153,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="cc-name">Nome no cartão</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required value="FULANO DE TAL">
                         <small class="text-muted">Nome completo no cartão</small>
                         <div class="invalid-feedback">
                             Nome no cartão é obrigatório.
@@ -162,7 +162,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="cc-number">Número do cartão</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required value="0000000000000000">
                         <div class="invalid-feedback">
                             Número do cartão é obrigatório.
                         </div>
@@ -174,7 +174,7 @@
 
                     <div class="col-md-3 md-3">
                         <label for="ccexpiration">Validade</label>
-                        <input type="text" class="form-control" id="ccexpiration" placeholder="" required>
+                        <input type="text" class="form-control" id="ccexpiration" placeholder="" required value="00/00">
                         <div class="invalid-feedback">
                             Validade do cartão é obrigatório.
                         </div>
@@ -182,7 +182,7 @@
 
                     <div class="col-md-3 mb-3">
                         <label for="cvv">CVV</label>
-                        <input type="text" class="form-control" id="cvv" placeholder="" required>
+                        <input type="text" class="form-control" id="cvv" placeholder="" required value="000">
                         <div class="invalid-feedback">
                             Código de segurança obrigatório.
                         </div>
@@ -192,7 +192,7 @@
 
                 <hr class="mb-3">
 
-                <button class="btn btn-success btn-lg btn-block" type="button">Concluir</button>
+                <button class="btn btn-success btn-lg btn-block" type="button" (click)="checkout()" [routerLink]="['/order/']">Concluir</button>
 
             </div>
 

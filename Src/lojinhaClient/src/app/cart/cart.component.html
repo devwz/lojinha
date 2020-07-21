@@ -97,7 +97,7 @@
 
                     <div class="text-right">
                         <button type="button" routerLink="/" class="btn btn-default ml-3">Continuar comprando</button>
-                        <button *ngIf="cart.itemCollection.length > 0" type="button" routerLink="/checkout" class="btn btn-success ml-3">Concluir compra</button>
+                        <button *ngIf="cart.itemCollection.length > 0" type="button" [routerLink]="['/checkout/']" class="btn btn-success ml-3">Concluir compra</button>
                     </div>
 
                 </div>

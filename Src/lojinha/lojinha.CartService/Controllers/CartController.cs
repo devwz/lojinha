@@ -94,7 +94,16 @@ namespace lojinha.CartService.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Cart> Delete(int id)
         {
-            throw new NotImplementedException();
+            Cart cart = GetCart();
+
+            if (cart.Id != id)
+            {
+                return NotFound();
+            }
+
+            _cartService.Delete(cart.CartKey);
+
+            return NoContent();
         }
 
         Cart GetCart()

@@ -42,18 +42,17 @@ namespace lojinha.CartService.Services
 
         public void UpdateCart(Cart cart)
         {
-            if (cart.Id != 0)
-            {
-                _repo.Update(cart);
-            }
+            _repo.Update(cart);
+        }
+
+        public void Delete(string cartKey)
+        {
+            _repo.Delete(cartKey);
         }
 
         public void Delete(int cartId, Item item)
         {
-            if (cartId != 0)
-            {
-                _repo.Delete(cartId, item);
-            }
+            _repo.Delete(cartId, item);
         }
     }
 }

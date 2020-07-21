@@ -32,9 +32,13 @@ namespace lojinha.Core.Data
             throw new NotImplementedException();
         }
 
-        public override void Delete(object id)
+        public override void Delete(object cartKey)
         {
-            throw new NotImplementedException();
+            string command = "Delete_Cart";
+            context.SqlConnection.ExecuteScalar<Int32>(
+                command,
+                new { CartKey = cartKey },
+                commandType: CommandType.StoredProcedure);
         }
 
         public void Delete(int cartId, Item item)

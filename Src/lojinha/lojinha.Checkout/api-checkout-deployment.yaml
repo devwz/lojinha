@@ -1,0 +1,46 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-checkout
+  name: api-checkout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-checkout
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: api-checkout
+    spec:
+      containers:
+      - image: api-checkout:v1
+        name: api-checkout
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: api-checkout
+  name: api-checkout
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31406
+  selector:
+    app: api-checkout
+  type: NodePort
+status:
+  loadBalancer: {}

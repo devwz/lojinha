@@ -1,0 +1,80 @@
+# PersistentVolume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mssql-volume
+spec:
+  capacity:
+    storage: 2Gi
+  storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: "/mnt/data"
+---
+# PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mssql-volume-claim
+spec:
+  storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: data-mssql
+  name: data-mssql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-mssql
+  template:
+    metadata:
+      labels:
+        app: data-mssql
+    spec:
+      containers:
+        - image: mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04
+          name: data-mssql
+          ports:
+            - containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_PID
+              value: "Developer"
+            - name: SA_PASSWORD
+              value: HdxNoH3h
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
+      volumes:
+        - name: data-mssql
+          persistentVolumeClaim:
+            claimName: mssql-volume-claim
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: data-mssql
+  name: data-mssql
+spec:
+  ports:
+    - port: 1433
+      nodePort: 30924
+  selector:
+    app: data-mssql
+  type: NodePort

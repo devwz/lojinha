@@ -1,0 +1,46 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-productcatalog
+  name: api-productcatalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-productcatalog
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: api-productcatalog
+    spec:
+      containers:
+      - image: api-productcatalog:v1
+        name: api-productcatalog
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: api-productcatalog
+  name: api-productcatalog
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31402
+  selector:
+    app: api-productcatalog
+  type: NodePort
+status:
+  loadBalancer: {}

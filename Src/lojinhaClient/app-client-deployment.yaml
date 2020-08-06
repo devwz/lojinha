@@ -1,0 +1,43 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lojinhaclient
+  name: lojinhaclient
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lojinhaclient
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: lojinhaclient
+    spec:
+      containers:
+      - image: lojinhaclient:v1
+        name: lojinhaclient
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: lojinhaclient
+  name: lojinhaclient
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31410
+  selector:
+    app: lojinhaclient
+  type: NodePort
+status:
+  loadBalancer: {}

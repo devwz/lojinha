@@ -38,10 +38,11 @@ namespace lojinha.Checkout
                     builder =>
                     {
                         builder
-                            .WithOrigins("http://localhost:4200")
                             .AllowCredentials()
                             .AllowAnyHeader()
-                            .AllowAnyMethod();
+                            .AllowAnyMethod()
+                            // .SetIsOriginAllowed((host) => true);
+                            .SetIsOriginAllowed(isOriginAllowed: _ => true);
                     });
             });
         }

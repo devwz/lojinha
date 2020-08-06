@@ -1,5 +1,6 @@
 ﻿using lojinha.Core.Data;
 using lojinha.Core.Domain;
+using lojinha.ProductCatalog.Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace lojinha.ProductCatalog.Controllers
         public ProductController(ProductRepo repo)
         {
             this.repo = repo;
+            ProductSeed.Seed(repo);
         }
 
         // GET api/product

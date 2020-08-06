@@ -25,8 +25,8 @@ namespace lojinha.CartService
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                // options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
 
             services.AddControllers();
@@ -42,10 +42,11 @@ namespace lojinha.CartService
                     builder =>
                     {
                         builder
-                            .WithOrigins("http://localhost:4200")
                             .AllowCredentials()
                             .AllowAnyHeader()
-                            .AllowAnyMethod();
+                            .AllowAnyMethod()
+                            // .SetIsOriginAllowed((host) => true);
+                            .SetIsOriginAllowed(isOriginAllowed: _ => true);
                     });
             });
         }

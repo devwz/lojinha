@@ -151,7 +151,9 @@ namespace lojinha.CartService.Controllers
             var cookieOptions = new CookieOptions
             {
                 IsEssential = true,
-                Expires = DateTime.Today.AddYears(1)
+                Expires = DateTime.Today.AddMonths(1),
+                SameSite = SameSiteMode.Strict
+                // Secure = true
             };
 
             Response.Cookies.Append(Constants.BASKET_COOKIENAME, cartKey, cookieOptions);

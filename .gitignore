@@ -4,3 +4,7 @@
 
 # VS
 .VS/
+
+# Assets
+*.jpg
+*.png

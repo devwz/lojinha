@@ -1,0 +1,36 @@
+# Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: api-productcatalog
+  name: api-productcatalog
+spec:
+  containers:
+  - env:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Development
+    image: api-productcatalog:v1
+    name: api-productcatalog
+    resources: {}
+  restartPolicy: Always
+status: {}
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: api-productcatalog
+  name: api-productcatalog
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31402
+  selector:
+    run: api-productcatalog
+  type: NodePort
+status:
+  loadBalancer: {}

@@ -13,7 +13,7 @@ import { CookiePolicyService } from './cart/cookiePolicy.service';
 })
 export class AppComponent {
   title = 'marketClient';
-  showAlert: boolean;
+  showAlert!: boolean;
 
   constructor(
     private cookiePolicyService: CookiePolicyService

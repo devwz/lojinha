@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵsetCurrentInjector } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { CartService } from './cart.service';
 import { Cart, Item } from './cart';
@@ -11,8 +11,8 @@ import { Cart, Item } from './cart';
   providers: [ CartService ]
 })
 export class CartComponent implements OnInit {
-  cart: Cart;
-  cartTotal: number;
+  cart!: Cart;
+  cartTotal!: number;
 
   constructor(private cartService: CartService) { }
 

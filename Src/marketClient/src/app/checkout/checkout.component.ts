@@ -12,8 +12,8 @@ import { CheckoutService } from './checkout.service';
   providers: [ CartService, CheckoutService ]
 })
 export class CheckoutComponent implements OnInit {
-  cart: Cart;
-  order: Order;
+  cart!: Cart;
+  order!: Order;
   cartTotal: number = 0;
 
   constructor(

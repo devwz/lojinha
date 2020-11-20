@@ -11,7 +11,7 @@ import { CartService } from '../cart/cart.service';
   providers: [ CartService ]
 })
 export class HeaderComponent implements OnInit {
-  cartItemLength: number;
+  cartItemLength!: number;
 
   constructor(private cartService: CartService) { }
 

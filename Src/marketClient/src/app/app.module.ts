@@ -4,26 +4,26 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { ProductCatalogComponent } from './product/catalog/catalog.component';
 import { ProductDetailComponent } from './product/detail/detail.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    ProductComponent,
-    ProductCatalogComponent,
-    ProductDetailComponent,
     CartComponent,
     CheckoutComponent,
-    OrderComponent
+    FooterComponent,
+    HeaderComponent,
+    OrderComponent,
+    ProductComponent,
+    ProductCatalogComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

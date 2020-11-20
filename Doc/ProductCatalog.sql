@@ -90,8 +90,8 @@ GO
 
 INSERT INTO [dbo].[Product] ([Title], [Type], [Price], [ImgUrl])
 VALUES
-	('Product 1', 'Type 1', 8, '/assets/image_1.jpg'),
-	('Product 2', 'Type 2', 6, '/assets/image_2.jpg'),
-	('Product 3', 'Type 1', 4, '/assets/image_3.jpg'),
-	('Product 4', 'Type 2', 2, '/assets/image_4.jpg')
+	('Carne de Soja', 'Alimentos', 8, '/assets/carne-de-soja.jpg'),
+	('Cebola', 'Alimentos', 6, '/assets/cebola.jpg'),
+	('Tomate', 'Alimentos', 4, '/assets/tomate.jpg'),
+	('Batata', 'Alimentos', 2, '/assets/batata.jpg')
 GO

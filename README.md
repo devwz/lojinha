@@ -5,7 +5,7 @@ Criando uma instância do Sql Server para Ubuntu 16.04
 * Requer 2GB de memória
 
 ```sh
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Passworld" -p 1433:1433 --name datacontext -d mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=strongpwd" -p 1433:1433 --name datacontext -d mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04
 ```
 
 ### Compilando e publicando uma imagem da aplicação ProductCatalog

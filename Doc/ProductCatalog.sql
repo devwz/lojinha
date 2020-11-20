@@ -1,7 +1,7 @@
-CREATE DATABASE [lojinha.ProductCatalog]
+CREATE DATABASE [market.ProductCatalog]
 GO
 
-USE [lojinha.ProductCatalog]
+USE [market.ProductCatalog]
 GO
 
 CREATE TABLE [dbo].[Product]
@@ -90,8 +90,8 @@ GO
 
 INSERT INTO [dbo].[Product] ([Title], [Type], [Price], [ImgUrl])
 VALUES
-	('Product 0', 'Type 1', 8, '/assets/image_1.jpg'),
-	('Product 1', 'Type 2', 6, '/assets/image_2.jpg'),
-	('Product 2', 'Type 1', 4, '/assets/image_3.jpg'),
-	('Product 3', 'Type 2', 2, '/assets/image_4.jpg')
+	('Product 1', 'Type 1', 8, '/assets/image_1.jpg'),
+	('Product 2', 'Type 2', 6, '/assets/image_2.jpg'),
+	('Product 3', 'Type 1', 4, '/assets/image_3.jpg'),
+	('Product 4', 'Type 2', 2, '/assets/image_4.jpg')
 GO

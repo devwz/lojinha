@@ -1,7 +1,7 @@
-CREATE DATABASE [lojinha.Checkout]
+CREATE DATABASE [market.Checkout]
 GO
 
-USE [lojinha.Checkout]
+USE [market.Checkout]
 GO
 
 CREATE TABLE [dbo].[Client]

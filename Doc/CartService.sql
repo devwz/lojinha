@@ -1,7 +1,7 @@
-CREATE DATABASE [lojinha.CartService]
+CREATE DATABASE [market.CartService]
 GO
 
-USE [lojinha.CartService]
+USE [market.CartService]
 GO
 
 CREATE TABLE [dbo].[Cart]

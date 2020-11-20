@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cart, Item } from './cart';
+import { Order } from '../order/order';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -11,6 +12,7 @@ const httpOptions = {
 
 @Injectable()
 export class CartService {
+    // apiUrl = 'http://localhost:31404/api/cart'; // kubectl
     apiUrl = 'http://localhost:51363/api/cart';
 
     constructor(private http: HttpClient) { }
@@ -18,6 +20,12 @@ export class CartService {
     // GET api/cart
     getCart() {
         return this.http.get<Cart>(this.apiUrl, httpOptions);
+    }
+
+    // DELETE api/cart
+    deleteCart(id: number) {
+        const url = `${this.apiUrl}/${id}`;
+        return this.http.delete<Order>(url, httpOptions);
     }
 
     // POST api/cart/item/add

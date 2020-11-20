@@ -34,13 +34,17 @@ export class CheckoutComponent implements OnInit {
 
   checkout(): void {
 
+    // Mocked
     this.order = {
+      id: 0,
       cart: this.cart,
       client: {
         name: "Fulano", 
+        id: 0,
         surname: "de Tal",
         email: "fulanodetal@outlook.com.br",
         address: {
+          id: 0,
           addressLine: "Rua Fulano de Tal, 0 - Americana",
           countryRegion: "Brasil",
           postalCode: "00000-000",
@@ -50,8 +54,14 @@ export class CheckoutComponent implements OnInit {
     };
 
     this.checkoutService.checkout(this.order)
-      .subscribe(order => {
+        .subscribe(order => {
         this.order = order;
-      })
+        console.log(order.cart.id);
+        if (order.id != 0)
+        {
+            this.cartService.deleteCart(order.cart.id)
+                .subscribe();
+        }
+      });
   }
 }

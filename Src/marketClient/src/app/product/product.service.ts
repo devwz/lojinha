@@ -5,6 +5,7 @@ import { Product } from './product';
 
 @Injectable()
 export class ProductService {
+    // apiUrl = 'http://localhost:31402/api/product'; // kubectl
     apiUrl = 'http://localhost:63009/api/product';
 
     constructor(private http: HttpClient) { }

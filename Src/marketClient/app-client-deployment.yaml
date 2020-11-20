@@ -3,22 +3,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: lojinhaclient
-  name: lojinhaclient
+    app: marketclient
+  name: marketclient
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: lojinhaclient
+      app: marketclient
   strategy: {}
   template:
     metadata:
       labels:
-        app: lojinhaclient
+        app: marketclient
     spec:
       containers:
-      - image: lojinhaclient:v1
-        name: lojinhaclient
+      - image: marketclient:v1
+        name: marketclient
         resources: {}
       restartPolicy: Always
 status: {}
@@ -28,8 +28,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: lojinhaclient
-  name: lojinhaclient
+    app: marketclient
+  name: marketclient
 spec:
   ports:
   - port: 80
@@ -37,7 +37,7 @@ spec:
     targetPort: 80
     nodePort: 31410
   selector:
-    app: lojinhaclient
+    app: marketclient
   type: NodePort
 status:
   loadBalancer: {}

@@ -12,7 +12,7 @@ import { CookiePolicyService } from './cart/cookiePolicy.service';
   ]
 })
 export class AppComponent {
-  title = 'lojinhaClient';
+  title = 'marketClient';
   showAlert: boolean;
 
   constructor(
@@ -49,8 +49,12 @@ export class AppComponent {
   }
 
   acceptCookiePolicy(): void {
+    /*
     this.cookiePolicyService.acceptCookiePolicy()
-      .subscribe(cookie => document.cookie = cookie);
+      .subscribe(cookie => {
+        document.cookie = cookie;
+      });
+    */
+   document.cookie = ".AspNet.Consent=yes; expires=Fri, 06 Aug 2021 03:47:31 GMT; path=/; SameSite=Strict";
   }
-
 }

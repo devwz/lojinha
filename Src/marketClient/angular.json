@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lojinhaClient": {
+    "marketClient": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -40,7 +40,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lojinhaClient",
+            "outputPath": "dist/marketClient",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -93,21 +93,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lojinhaClient:build"
+            "browserTarget": "marketClient:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "lojinhaClient:build:production"
+              "browserTarget": "marketClient:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lojinhaClient:build"
+            "browserTarget": "marketClient:build"
           }
         }
       }
     }},
-  "defaultProject": "lojinhaClient"
+  "defaultProject": "marketClient"
 }

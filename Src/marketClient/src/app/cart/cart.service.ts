@@ -12,8 +12,7 @@ const httpOptions = {
 
 @Injectable()
 export class CartService {
-    // apiUrl = 'http://localhost:31404/api/cart'; // kubectl
-    apiUrl = 'http://localhost:51363/api/cart';
+    apiUrl = 'http://127.0.0.1:31404/api/cart';
 
     constructor(private http: HttpClient) { }
 

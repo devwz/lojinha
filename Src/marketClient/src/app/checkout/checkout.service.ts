@@ -11,8 +11,7 @@ const httpOptions = {
 
 @Injectable()
 export class CheckoutService {
-    // apiUrl = 'http://127.0.0.1:31406/api/checkout'; // kubectl
-    apiUrl = 'http://127.0.0.1:58374/api/checkout';
+    apiUrl = 'http://127.0.0.1:31406/api/checkout';
 
     constructor(private http: HttpClient) { }
 

@@ -6,7 +6,7 @@ metadata:
     app: marketclient
   name: marketclient
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: marketclient
@@ -35,7 +35,7 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: 31410
+    nodePort: 31408
   selector:
     app: marketclient
   type: NodePort

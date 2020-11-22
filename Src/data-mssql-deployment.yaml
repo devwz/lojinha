@@ -31,21 +31,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: data-mssql
-  name: data-mssql
+    app: datacontext
+  name: datacontext
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: data-mssql
+      app: datacontext
   template:
     metadata:
       labels:
-        app: data-mssql
+        app: datacontext
     spec:
       containers:
         - image: mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04
-          name: data-mssql
+          name: datacontext
           ports:
             - containerPort: 1433
           env:
@@ -54,13 +54,16 @@ spec:
             - name: MSSQL_PID
               value: "Developer"
             - name: SA_PASSWORD
-              value: HdxNoH3h
+              valueFrom:
+                  secretKeyRef:
+                      name: mssql
+                      key: SA_PASSWORD
           resources:
             requests:
               cpu: 1
               memory: 2Gi
       volumes:
-        - name: data-mssql
+        - name: datacontext
           persistentVolumeClaim:
             claimName: mssql-volume-claim
 ---
@@ -69,12 +72,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: data-mssql
-  name: data-mssql
+    app: datacontext
+  name: datacontext
 spec:
   ports:
     - port: 1433
+      targetPort: 1433
       nodePort: 30924
   selector:
-    app: data-mssql
-  type: NodePort
+    app: datacontext
+  type: LoadBalancer
